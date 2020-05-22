@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-br" style="height: 100%;width: 100%;">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet"> 
+	<link rel="stylesheet" href="bootstrap.css">
+
+	<meta property="og:title" content="Quantas horas custa isso?">
+	<meta property="og:image" content="https://quanto-por-hora.web.app/iconBig.png">
+	<meta property="og:image:width" content="512">
+	<meta property="og:image:height" content="512">
+	<meta property="og:description" content="Veja quantas horas de trabalho esse produto vai te custar!.">
+	<meta property="og:url" content="https://quanto-por-hora.web.app/">
+	<meta name="twitter:card" content="https://quanto-por-hora.web.app/iconBig.png">
+
+	<title>Quantas horas custa isso?</title>
+	<link rel="SHORTCUT ICON" href="icon.png" type="image" />
+	<link rel="ICON" href="icon.png" type="image" />
+</head>
+<style>
+.myButton {
+	background-color:#77b55a;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	font-weight:bold;
+}
+.myButton:hover {
+	background-color:#8bd369;
+}
+	.myButton:active {
+		position:relative;
+	top:1px;
+}
+
+</style>
+<body id="body" class="row m-0" style="min-height: 100%;width: 100%;">
+	<div class="col-md-5 col-12 p-md-3 py-5 row mx-0" style="min-height: 100%; background-color: #E0A18F; font-family: 'Lato', sans-serif;">
+		<div class="text-center col-12 align-self-center">
+			<h1 style="font-weight: 700;">Quantas horas custa esse produto?</h1>
+			<h2 class="mt-4">Tá afim de fazer uma compra mas não tem certeza se vale a pena? Veja quantas horas de trabalho esse produto vai te custar!</h2>
+		</div>
+	</div>
+	<div class="col-md-7 col-12 p-md-3 pt-3 pb-5 row mx-0" style="min-height: 100%; background-color: #24FFBE">
+		<div class="text-center col-12 align-self-center">
+			<div class="my-2">
+				<label style="font-size: 1.2em" for="salary">Quanto o produto custa?</label>
+				<br>
+				R$ <input name="price" id="price" type="text" size="5">
+			</div>
+			<div class="my-2">
+				<label style="font-size: 1.2em" for="salary">Quanto você recebe por mês?</label>
+				<br>
+				R$ <input name="salary" id="salary" type="text" size="5">
+			</div>
+			<div class="my-2">
+				<label style="font-size: 1.2em" for="salary">Quantas horas você trabalha por semana?</label>
+				<br>
+				<input name="hoursWork" id="hoursWork" type="text" size="3">
+			</div>
+			<div id="resultDiv" class="my-2" style="display: none;">
+				<h3>Esse produto vai te custar <span id="hours"></span> horas de trabalho</h3>
+			</div>
+			<div id="invalidResults" class="my-2" style="display: none;">
+				<h3>Valores inválidos</h3>
+			</div>			
+			<button class="btn btn-success w-50 mt-2 myButton" type="button" onclick="updateHours()">Calcular!</button>
+		</div>
+		<div>
+
+		</div>
+	</div>
+	<span class="fixed-bottom" style="right:0 !important">Feito pelo <a href="https://github.com/fernando-sa">Fernando :)</a></span>
+</body>
+<script>
+	function updateHours()
+	{
+		let salary = document.getElementById('salary').value.replace(",", ".");
+		let price = document.getElementById('price').value.replace(",", ".");
+		let hoursWork = document.getElementById('hoursWork').value;
+
+		document.getElementById('resultDiv').style.display = "none";
+		document.getElementById('invalidResults').style.display = "none";
+
+		if (salary != "" && hoursWork != "" && price != "") {
+			let value =  price / ((salary / 4) / hoursWork);
+			if(isNaN(value)){
+				document.getElementById('invalidResults').style.display = "block";
+				document.getElementById('resultDiv').style.display = "none";
+			}
+			else {
+				document.getElementById('hours').innerText = value.toFixed(2);
+				document.getElementById('resultDiv').style.display = "block";
+			}
+		}
+	}
+	document.getElementById('body').style.width = window.innerWidth;
+</script>
+</html>
